@@ -1,48 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+
 <head>
+        <title>TBD</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <style>
+                .logo {
+                        width: 100px;
+                        margin: 20px;
+                }
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+                li {
+                        list-style-type: none;
+                }
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+                li:hover,
+                li:active {
+                        background-color: #aaaaaa;
+                }
 
-<script src="script.js"></script>
-<link rel="stylesheet" href="styles.css">
+                .grid-container {
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+                        margin: 50px;
+                        padding: 0px;
+                }
 
+                .grid-item {
+                        background-color: white;
+                        outline: 1px solid black;
+                        font-family: helvetica;
+                        font-weight: bold;
+                        text-align: left;
+                        padding: 20px;
+                }
+
+                .bi-check-circle-fill {
+                        margin-right: 10px;
+                }
+
+                @media only screen and (max-width: 1024px) {
+                        .grid-container {
+                                grid-template-columns: auto;
+                        }
+                }
+
+                .background-container {
+                        position: fixed;
+                        padding-top: 100px;
+                        left: 0;
+                        top: 0;
+                        width: 100%;
+                        height: 100%;
+                        overflow: auto;
+                        background-color: rgba(0, 0, 0, 0.4);
+                }
+
+                .popup-container {
+                        background-color: white;
+                        width: 300px;
+                        height: 300px;
+                        margin: 0;
+                        position: relative;
+                        top: 50%;
+                        left: 50%;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                }
+
+                .spinner-container {
+                        width: 18px;
+                        height: 18px;
+                        margin: 0;
+                        position: relative;
+                        top: 45%;
+                        left: 48%;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        -webkit-animation: spin 2s linear infinite;
+                        animation: spin 2s linear infinite;
+                }
+
+                @-webkit-keyframes spin {
+                        0% {
+                                -webkit-transform: rotate(0deg);
+                        }
+
+                        100% {
+                                -webkit-transform: rotate(360deg);
+                        }
+                }
+
+                @keyframes spin {
+                        0% {
+                                transform: rotate(0deg);
+                        }
+
+                        100% {
+                                transform: rotate(360deg);
+                        }
+                }
+
+                .bi-arrow-clockwise {
+                        margin: 0;
+                        position: relative;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                }
+
+                .loadingtext {
+                        margin: 0;
+                        position: relative;
+                        top: 46%;
+                        left: 42%;
+                        -ms-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        font-family: helvetica;
+                        font-weight: bold;
+                }
+        </style>
 </head>
+
 <body>
+        <div class="background-container">
+                <div class="popup-container">
+                        <div class="spinner-container">
+                                <i class="bi bi-arrow-clockwise"></i>
 
-    <div class="modalContainer hidden">
-        <div class="modalContent">
-            <div class="loadingContent">
-                <i class="loadingIcon bi bi-arrow-clockwise"></i>
-                <span class="loadingText">Loading...</span>    
-            </div>
+                        </div>
+                        <span class="loadingtext">Loading...</span>
+                </div>
         </div>
-    </div>
-
-    <img 
-    class="logo"
-    src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"/>
-    <ul class="grid-container">
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70749">Create and publish a public repository in GitHub under your personal account named 'Engineering Training'</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70771">Create index.html with basic html markup and perform first commit</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70804">Add anchor tags for each completed subtasks</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70805">Make unordered list of anchor tags</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70905">Add the TWM logo as an image to the beginning of the body of the page</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70918">Add style attributes to img tag to setting the height and width of the logo</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-70993">Add a head, add a style tag to the head, add a class to style tag, move logo styles to style tag, remove inline styles from logo, add class to the logo</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-71030">Add a selector inside style tag that targets the list items and removes the bullet</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-71062">Pseudo-selectors - Add hover styling to list elements</a></li>
-        <li><i class="bi bi-check-circle-fill"></i><a href="https://totalwine.atlassian.net/browse/DIG-71085">UI Libraries - Add Bootstrap to your page, add check icons to your list, and convert your list into a bootstrap list-group</a></li>
-    </ul>
+        <div class="logo"><img
+                        src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"
+                        alt="Total Wine & More"></div>
+        <ul class="grid-container">
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70749">Create and
+                                publish a public repository in GitHub under your personal account named 'Engineering
+                                Training'</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70771">Create
+                                index.html with basic html markup and perform first commit</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70804">Add anchor
+                                tags for each completed subtasks</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70805">Make
+                                unordered list of anchor tags</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70905">Add the
+                                TWM logo as an image to the beginning of the body of the page</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70918">Add style
+                                attributes to img tag to setting the height and width of the logo</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-70993">Add a
+                                head, add a style tag to the head, add a class to style tag, move logo styles to style
+                                tag, remove
+                                inline styles from logo, add class to the logo</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71030">Add a
+                                selector inside style tag that targets the list items and removes the bullet</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71062">Pseudo-selectors - Add hover
+                                styling to list
+                                elements</a></li>
+                <li class="grid-item"><i class="bi bi-check-circle-fill"></i><a
+                                href="https://totalwine.atlassian.net/browse/DIG-71085">UI
+                                Libraries - Add Bootstrap to your page, add check icons to your list, and convert your
+                                list into a
+                                bootstrap list-group</a></li>
+                <li class="grid-item"></li>
+                <li class="grid-item"></li>
+        </ul>
 </body>
+
 </html>
-
-
