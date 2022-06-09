@@ -15,6 +15,7 @@
     <style>
         .logo {
             width: 100px;
+            margin: 20px;
         }
         ul {
             list-style-type: none;
@@ -39,9 +40,58 @@
         li:nth-child(3n) {
             border-right: 0px
         }
+        i {
+            margin-right: 15px;
+        }
+        .modalContainer {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            background: rgba( 0, 0, 0, .5);
+        }
+        .modalContent {
+            width: 300px;
+            height: 300px;
+            position:relative;
+            margin: auto auto;
+            background: white;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        .loadingContent {
+            width: 100%;
+            text-align: center;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            position: absolute;
+        }
+        .loadingIcon {
+            display: block;
+        }
+        @media only screen and (max-width: 1024px) {
+            .grid-container {
+                grid-template-columns: auto;
+            }
+            li {
+                padding: 20px;
+                border-right: 0px;
+            }
+        }
     </style>
 </head>
 <body>
+
+    <div class="modalContainer">
+        <div class="modalContent">
+            <div class="loadingContent">
+                <i class="loadingIcon bi bi-arrow-clockwise"></i>
+                <span class="loadingText">Loading...</span>    
+            </div>
+        </div>
+    </div>
+
     <img 
     class="logo"
     src="https://www.totalwine.com/global-static-resources/@totalwinelabs/twc-icon/3.13.0/twm-logo-color.svg#twm-logo-color"/>
