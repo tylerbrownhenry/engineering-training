@@ -42,5 +42,23 @@ const jiraLinks = [
     "https://totalwine.atlassian.net/browse/DIG-71085",
 ];
 
-jiraTitles.forEach( (e) => console.log(e))
+const jirasObject = [];
+
+jiraTitles.forEach( (e) => console.log(e));
 jiraLinks.forEach( (e) => console.log(e));
+
+for (let index = 0; index < jiraTitles.length; index++) {
+    jirasObject.push({
+        link: jiraLinks[index],
+        title: jiraTitles[index],
+    });
+}
+
+console.log('jirasObject', jirasObject)
+let gridContainer = document.getElementsByClassName('grid-container');
+
+jirasObject.forEach((jira) => {
+    console.log('jira',jira);
+    var listItem = document.createElement("li");
+    gridContainer[0].prepend(listItem);
+})
