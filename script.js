@@ -6,6 +6,7 @@ const modalButton = document.getElementById('modalButton');
 console.log("modalButton", modalButton);
 modalButton.addEventListener("click", ()=> {
     console.log('Clicked!');
+    loadData();
     modalContainer.classList.toggle("hidden");
 });
 
@@ -61,7 +62,13 @@ jirasObject.forEach((jira) => {
     console.log('jira',jira);
     var listItem = document.createElement("li");
     listItem.innerHTML = `
-        <i class="bi bi-check-circle-fill"></i><a href="${jira.link}">${jira.title}</a>
+    <i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${jira.link}">${jira.title}</a>
     `;
     gridContainer[0].append(listItem);
-})
+});
+
+function loadData() {
+    setTimeout(()=>{
+        console.log('Data loaded');
+    },1000);
+}
