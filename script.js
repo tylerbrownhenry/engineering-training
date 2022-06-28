@@ -6,8 +6,11 @@ const modalButton = document.getElementById("modalButton");
 console.log("modalButton", modalButton);
 modalButton.addEventListener("click", () => {
   console.log("Clicked!");
-  loadData();
+  if (dataLoaded) { 
+    return
+  }
   modalContainer.classList.toggle("hidden");
+  loadData();
 });
 
 let closeModalButton = document.getElementsByClassName("closeModalButton");
@@ -78,9 +81,12 @@ function renderData() {
   })
 }
 
+let dataLoaded = false;
+
 function loadData() {
     console.log("Data loaded");
     renderData().then((response)=>{
+      dataLoaded = true;
       gridContainer.innerHTML = response;
       modalContainer.classList.add("hidden");
     })
