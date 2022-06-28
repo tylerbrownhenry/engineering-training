@@ -59,32 +59,29 @@ console.log("jirasObject", jirasObject);
 
 let gridContainer = document.getElementsByClassName("grid-container");
 // This is an array of all elements that have the class 'grid container' on the page
-
 gridContainer = gridContainer[0];
 // This is now the first element from the array
 
 function renderData() {
-  jirasObject.forEach((jira) => {
-    // Looping through the jiraObject, each jira object has a 'title' and 'link' property
-
-    var listItem = document.createElement("li");
-    // Ceating a new 'li' element
-
-    listItem.innerHTML = `
-        <i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${jira.link}">${jira.title}</a>
+  return new Promise((resolve)=>{
+    setTimeout(() => {
+      let response = '';
+      jirasObject.forEach((jira) => {
+        const { title, link } = jira;
+        response += `
+        <li><i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${link}">${title}</a></li>
         `;
-    // We are setting innerHTML of the newly created li to out string template
-    // In the string template we are using the title and link from a jira in each iteration of the loop
-
-    gridContainer.append(listItem);
-    // Add the newly created li element to beginning of the grid-container element
-  });
+      });
+      console.log('response',response, jirasObject);
+      resolve(response);
+    }, 1000);
+  })
 }
 
 function loadData() {
-  setTimeout(() => {
     console.log("Data loaded");
-    renderData();
-    modalContainer.classList.add("hidden");
-  }, 1000);
+    renderData().then((response)=>{
+      gridContainer.innerHTML = response;
+      modalContainer.classList.add("hidden");
+    })
 }
