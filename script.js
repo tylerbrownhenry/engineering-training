@@ -10,7 +10,7 @@ modalButton.addEventListener("click", () => {
     return
   }
   modalContainer.classList.toggle("hidden");
-  loadData();
+  utils.loadData();
 });
 
 let closeModalButton = document.getElementsByClassName("closeModalButton");
@@ -65,29 +65,29 @@ let gridContainer = document.getElementsByClassName("grid-container");
 gridContainer = gridContainer[0];
 // This is now the first element from the array
 
-function renderData() {
-  return new Promise((resolve)=>{
-    setTimeout(() => {
-      let response = '';
-      jirasObject.forEach((jira) => {
-        const { title, link } = jira;
-        response += `
-        <li><i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${link}">${title}</a></li>
-        `;
-      });
-      console.log('response',response, jirasObject);
-      resolve(response);
-    }, 1000);
-  })
-}
-
-let dataLoaded = false;
-
-function loadData() {
-    console.log("Data loaded");
-    renderData().then((response)=>{
+const utils = {
+  renderData: function () {
+    return new Promise((resolve)=>{
+      setTimeout(() => {
+        let response = '';
+        jirasObject.forEach((jira) => {
+          const { title, link } = jira;
+          response += `
+          <li><i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${link}">${title}</a></li>
+          `;
+        });
+        resolve(response);
+      }, 1000);
+    })
+  },
+  loadData: function () {
+    console.log("Data loaded",this);
+    this.renderData().then((response)=>{
       dataLoaded = true;
       gridContainer.innerHTML = response;
       modalContainer.classList.add("hidden");
     })
+  }
 }
+
+let dataLoaded = false;
