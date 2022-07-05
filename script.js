@@ -46,19 +46,25 @@ const jiraLinks = [
   "https://totalwine.atlassian.net/browse/DIG-71085",
 ];
 
-const jirasObject = [];
-
-jiraTitles.forEach((e) => console.log(e));
-jiraLinks.forEach((e) => console.log(e));
-
-for (let index = 0; index < jiraTitles.length; index++) {
-  jirasObject.push({
-    link: jiraLinks[index],
-    title: jiraTitles[index],
-  });
+class DataHandler {
+  constructor(links, titles) {
+    this.links = links;
+    this.titles = titles;
+    this.jirasObject = [];
+    this.createJiraObject();
+  }
+  // Method
+  createJiraObject() {
+    for (let index = 0; index < jiraTitles.length; index++) {
+      this.jirasObject.push({
+        link: jiraLinks[index],
+        title: jiraTitles[index],
+      });
+    }
+  }
 }
 
-console.log("jirasObject", jirasObject);
+const dataHandler = new DataHandler(jiraLinks, jiraTitles);
 
 let gridContainer = document.getElementsByClassName("grid-container");
 // This is an array of all elements that have the class 'grid container' on the page
@@ -70,7 +76,7 @@ const utils = {
     return new Promise((resolve)=>{
       setTimeout(() => {
         let response = '';
-        jirasObject.forEach((jira) => {
+        dataHandler.jirasObject.forEach((jira) => {
           const { title, link } = jira;
           response += `
           <li><i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${link}">${title}</a></li>
