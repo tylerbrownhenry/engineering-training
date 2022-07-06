@@ -4,14 +4,23 @@ const modalContainer = document.getElementById("modalContainer");
 const modalButton = document.getElementById("modalButton");
 
 console.log("modalButton", modalButton);
-modalButton.addEventListener("click", () => {
-  console.log("Clicked!");
-  if (dataLoaded) { 
-    return
-  }
-  modalContainer.classList.toggle("hidden");
-  utils.loadData();
-});
+
+
+function initModalButton() {
+  let dataLoaded = false;
+  modalButton.addEventListener("click", () => {
+    console.log("Clicked!");
+    if (dataLoaded) { 
+      return
+    }
+    modalContainer.classList.toggle("hidden");
+    utils.loadData(()=>{
+      dataLoaded = true;
+    });
+  });
+}
+
+initModalButton();
 
 let closeModalButton = document.getElementsByClassName("closeModalButton");
 console.log("closeModalButton", closeModalButton);
@@ -101,16 +110,13 @@ const utils = {
       }, 1000);
     })
   },
-  loadData: function () {
+  loadData: function (callback) {
     console.log("Data loaded",this);
     this.renderData().then((response)=>{
-        console.log('response', response)
-
-      dataLoaded = true;
+      console.log('response', response)
       gridContainer.innerHTML = response;
       modalContainer.classList.add("hidden");
+      callback();
     })
   }
 }
-
-var dataLoaded = false;
