@@ -46,6 +46,13 @@ const jiraLinks = [
   "https://totalwine.atlassian.net/browse/DIG-71085",
 ];
 
+const jiraTemplate = {
+    icon: "bi bi-check-circle-fill"
+}
+
+const errorJiraTemplate = {
+  icon: "bi bi-x-circle"
+}
 class DataHandler {
   constructor(links, titles) {
     this.links = links;
@@ -56,10 +63,12 @@ class DataHandler {
   // Method
   createJiraObject() {
     for (let index = 0; index < jiraTitles.length; index++) {
+      const template = getRandomInt(3) !== 0 ? jiraTemplate : errorJiraTemplate;
       this.jirasObject.push({
+        ...template,
         link: jiraLinks[index],
         title: jiraTitles[index],
-      });
+    });
     }
   }
 }
@@ -71,17 +80,23 @@ let gridContainer = document.getElementsByClassName("grid-container");
 gridContainer = gridContainer[0];
 // This is now the first element from the array
 
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
 const utils = {
   renderData: function () {
     return new Promise((resolve)=>{
       setTimeout(() => {
         let response = '';
         dataHandler.jirasObject.forEach((jira) => {
-          const { title, link } = jira;
+          const { title, link, icon } = jira;
           response += `
-          <li><i class="bi bi-x"></i><i class="bi bi-check-circle-fill"></i><a href="${link}">${title}</a></li>
+          <li></i><i class="${icon}"></i><a href="${link}">${title}</a></li>
           `;
         });
+        console.log('response', response)
+
         resolve(response);
       }, 1000);
     })
@@ -89,6 +104,8 @@ const utils = {
   loadData: function () {
     console.log("Data loaded",this);
     this.renderData().then((response)=>{
+        console.log('response', response)
+
       dataLoaded = true;
       gridContainer.innerHTML = response;
       modalContainer.classList.add("hidden");
@@ -96,4 +113,4 @@ const utils = {
   }
 }
 
-let dataLoaded = false;
+var dataLoaded = false;
