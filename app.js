@@ -9,6 +9,7 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
+app.use(express.static('public'))
 app.use('/', router);
 
 app.listen(port, () => {
