@@ -17,14 +17,6 @@
     }
 });
 
-octokit.rest.repos.listCommits({
-    owner: "tylerbrownhenry",
-    repo: "engineering-training",
-  }).then((resp)=>{
-      console.log("resp",resp);
-  })
-
-
   
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
@@ -71,7 +63,22 @@ class DataHandler {
       this.titles = titles;
       this.jirasObject = [];
       this.createJiraObject();
+      this.fetchGitHubData();
     }
+    fetchGitHubData() {
+        return new Promise((resolve)=>{
+            octokit.rest.repos.listCommits({
+                owner: "tylerbrownhenry",
+                repo: "engineering-training",
+              }).then((resp)=>{
+                  console.log("resp",resp);
+                    resp.data.forEach((commit)=>{
+                        console.log('commit message: ',commit.commit.message);
+                    })
+              })
+        });
+    }
+
     // Method
     createJiraObject() {
       for (let index = 0; index < jiraTitles.length; index++) {
