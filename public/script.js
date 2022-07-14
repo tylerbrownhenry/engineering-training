@@ -90,9 +90,17 @@
   }
 
   const utils = {
-    renderData: function () {
-      return new Promise((resolve)=>{
-        setTimeout(() => {
+    renderData: async () => {
+      return new Promise(async(resolve)=>{
+
+          const result = await fetch('/getJiraTickets');
+            // console.log('result',result.json());
+
+            result.json().then((data)=>{
+              console.log(data);
+            })
+
+
           let response = '';
           dataHandler.jirasObject.forEach((jira) => {
             const { title, link, icon } = jira;
@@ -103,7 +111,6 @@
           console.log('response', response)
 
           resolve(response);
-        }, 1000);
       })
     },
     loadData: function (callback) {
