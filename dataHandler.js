@@ -1,4 +1,31 @@
 
+  const { Octokit } = require("@octokit/rest");
+
+  const octokit = new Octokit({ 
+    auth: process.env.GITHUB_TOKEN,
+    baseUrl: 'https://api.github.com',
+    log: {
+        debug: () => {},
+        info: () => {},
+        warn: console.warn,
+        error: console.error
+    },
+    request: {
+        agent: undefined,
+        fetch: undefined,
+        timeout: 0
+    }
+});
+
+octokit.rest.repos.listCommits({
+    owner: "tylerbrownhenry",
+    repo: "engineering-training",
+  }).then((resp)=>{
+      console.log("resp",resp);
+  })
+
+
+  
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
     "Create index.html with basic html markup and perform first commit",
