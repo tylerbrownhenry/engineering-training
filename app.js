@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const path = require('path');
 const router = express.Router();
+const dataHandler = require('./dataHandler');
 const port = 3000
 
 router.get('/',function(req,res){
@@ -11,7 +12,7 @@ router.get('/',function(req,res){
 
 router.get('/getJiraTickets',function(req,res){
   res.json({
-    data: []
+    jirasObject: dataHandler.jirasObject
   })
 });
 
