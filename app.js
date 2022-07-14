@@ -9,6 +9,12 @@ router.get('/',function(req,res){
   //__dirname : It will resolve to your project folder.
 });
 
+router.get('/getJiraTickets',function(req,res){
+  res.json({
+    data: []
+  })
+});
+
 app.use(express.static('public'))
 app.use('/', router);
 
