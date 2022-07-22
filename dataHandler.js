@@ -22,7 +22,7 @@ var JiraApi = require('jira-client');
 // Initialize
 var jira = new JiraApi({
   protocol: 'https',
-  host: 'totalwine.atlassian.net',
+  host: process.env.JIRA_HOST,
   username: process.env.JIRA_USER_NAME,
   password: process.env.JIRA_TOKEN,
   apiVersion: '2',
@@ -37,7 +37,6 @@ jira.findIssue("DIG-72591")
     console.error(err);
   });
 
-  
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
     "Create index.html with basic html markup and perform first commit",
