@@ -17,6 +17,36 @@
     }
 });
 
+// FNywxq9haxboqfRtk22y9CB0
+// const jiraAuth = 'thenry@totalwine.com:7IJtKLR3ov9wodkXoPLs0215';
+const jiraHost = 'totalwine.atlassian.net';
+// const repoPath = (repo, owner) => `https://github.com/${owner}/${repo}`; 
+const jiraPath = (jiraNumber) => `/rest/api/2/issue/${jiraNumber}`; //?fields=assignee,summary,status,components,issuelinks`;
+const http = require('https');
+const jiraRelativePath = 'https://totalwine.atlassian.net/browse/rest/api/2/issue/DIG-72452';
+
+
+// With ES5
+var JiraApi = require('jira-client');
+
+// Initialize
+var jira = new JiraApi({
+  protocol: 'https',
+  host: 'totalwine.atlassian.net',
+  username: 'thenry@totalwine.com',
+  password: '7IJtKLR3ov9wodkXoPLs0215',
+  apiVersion: '2',
+  strictSSL: true
+});
+
+jira.findIssue("DIG-72591")
+  .then(function(issue) {
+    console.log('Status: ' + issue.fields.status.name);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+
   
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
@@ -71,7 +101,7 @@ class DataHandler {
                 owner: "tylerbrownhenry",
                 repo: "engineering-training",
               }).then((resp)=>{
-                  console.log("resp",resp);
+                  // console.log("resp",resp);
                     resp.data.forEach((commit)=>{
                         console.log('commit message: ',commit.commit.message);
                     })
