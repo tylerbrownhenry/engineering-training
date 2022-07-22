@@ -50,6 +50,17 @@ var jira = new JiraApi({
     });
   }
 
+  function findJiraIssues (commits){
+    let promises = [];
+    while(commits.length > 0){
+      promises.push(findJiraIssue(commits.pop()));
+    }
+
+    return Promise.all(promises).then((values)=>{
+      console.log('nex',values);
+      });
+  };
+
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
     "Create index.html with basic html markup and perform first commit",
@@ -117,6 +128,7 @@ class DataHandler {
                       })
 
                       console.log('jiras: ',jiras);
+                      findJiraIssues(jiras)
               })
         });
     }
