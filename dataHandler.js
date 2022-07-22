@@ -1,4 +1,42 @@
 
+// With ES5
+var JiraApi = require('jira-client');
+  const { Octokit } = require("@octokit/rest");
+
+  const octokit = new Octokit({ 
+    auth: process.env.GITHUB_TOKEN,
+    baseUrl: 'https://api.github.com',
+    log: {
+        debug: () => {},
+        info: () => {},
+        warn: console.warn,
+        error: console.error
+    },
+    request: {
+        agent: undefined,
+        fetch: undefined,
+        timeout: 0
+    }
+});
+
+// Initialize
+var jira = new JiraApi({
+  protocol: 'https',
+  host: process.env.JIRA_HOST,
+  username: process.env.JIRA_USER_NAME,
+  password: process.env.JIRA_TOKEN,
+  apiVersion: '2',
+  strictSSL: true
+});
+
+jira.findIssue("DIG-72591")
+  .then(function(issue) {
+    console.log('Status: ' + issue.fields.status.name);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
     "Create index.html with basic html markup and perform first commit",
@@ -44,7 +82,22 @@ class DataHandler {
       this.titles = titles;
       this.jirasObject = [];
       this.createJiraObject();
+      this.fetchGitHubData();
     }
+    fetchGitHubData() {
+        return new Promise((resolve)=>{
+            octokit.rest.repos.listCommits({
+                owner: "tylerbrownhenry",
+                repo: "engineering-training",
+              }).then((resp)=>{
+                  // console.log("resp",resp);
+                    resp.data.forEach((commit)=>{
+                        console.log('commit message: ',commit.commit.message);
+                    })
+              })
+        });
+    }
+
     // Method
     createJiraObject() {
       for (let index = 0; index < jiraTitles.length; index++) {
