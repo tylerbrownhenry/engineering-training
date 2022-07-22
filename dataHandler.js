@@ -23,8 +23,8 @@ var JiraApi = require('jira-client');
 var jira = new JiraApi({
   protocol: 'https',
   host: 'totalwine.atlassian.net',
-  username: 'thenry@totalwine.com',
-  password: '7IJtKLR3ov9wodkXoPLs0215',
+  username: process.env.JIRA_USER_NAME,
+  password: process.env.JIRA_TOKEN,
   apiVersion: '2',
   strictSSL: true
 });
