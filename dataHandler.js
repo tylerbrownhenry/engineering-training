@@ -1,3 +1,4 @@
+require('dotenv').config();
 
 // With ES5
 var JiraApi = require('jira-client');
@@ -29,13 +30,25 @@ var jira = new JiraApi({
   strictSSL: true
 });
 
-jira.findIssue("DIG-72591")
-  .then(function(issue) {
-    console.log('Status: ' + issue.fields.status.name);
-  })
-  .catch(function(err) {
-    console.error(err);
-  });
+
+  const findJiraIssue = (number) =>{ 
+    return new Promise((resolve, reject)=>{
+    jira.findIssue(number)
+    .then(function(issue) {
+      const { summary } = issue.fields;
+      // let summary = 'test';
+      // console.log('Status: ' + issue);
+      resolve({
+        title: summary,
+        link: `https://totalwine.atlassian.net/browse/${number}`
+      });
+    })
+    .catch(function(err) {
+      console.error(err);
+      reject(err)
+    });
+    });
+  }
 
   const jiraTitles = [
     "Create and publish a public repository in GitHub under your personal account named 'Engineering Training'",
@@ -85,6 +98,7 @@ class DataHandler {
       this.fetchGitHubData();
     }
     fetchGitHubData() {
+        const jiras = [];
         return new Promise((resolve)=>{
             octokit.rest.repos.listCommits({
                 owner: "tylerbrownhenry",
@@ -92,8 +106,17 @@ class DataHandler {
               }).then((resp)=>{
                   // console.log("resp",resp);
                     resp.data.forEach((commit)=>{
-                        console.log('commit message: ',commit.commit.message);
-                    })
+                        var jira_matcher = /([A-Z][A-Z0-9]+-[0-9]+)/g;
+                        
+                        const mess = commit.commit.message;
+                        const jira = mess.match(jira_matcher);
+
+                        if(jiras.indexOf(jira) === -1 && jira !== null) {
+                          jiras.push(jira);
+                        }
+                      })
+
+                      console.log('jiras: ',jiras);
               })
         });
     }
