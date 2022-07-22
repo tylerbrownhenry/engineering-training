@@ -1,4 +1,6 @@
 
+// With ES5
+var JiraApi = require('jira-client');
   const { Octokit } = require("@octokit/rest");
 
   const octokit = new Octokit({ 
@@ -16,18 +18,6 @@
         timeout: 0
     }
 });
-
-// FNywxq9haxboqfRtk22y9CB0
-// const jiraAuth = 'thenry@totalwine.com:7IJtKLR3ov9wodkXoPLs0215';
-const jiraHost = 'totalwine.atlassian.net';
-// const repoPath = (repo, owner) => `https://github.com/${owner}/${repo}`; 
-const jiraPath = (jiraNumber) => `/rest/api/2/issue/${jiraNumber}`; //?fields=assignee,summary,status,components,issuelinks`;
-const http = require('https');
-const jiraRelativePath = 'https://totalwine.atlassian.net/browse/rest/api/2/issue/DIG-72452';
-
-
-// With ES5
-var JiraApi = require('jira-client');
 
 // Initialize
 var jira = new JiraApi({
