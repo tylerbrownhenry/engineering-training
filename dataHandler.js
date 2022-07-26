@@ -33,20 +33,19 @@ var jira = new JiraApi({
 
   const findJiraIssue = (number) =>{ 
     return new Promise((resolve, reject)=>{
-    jira.findIssue(number)
-    .then(function(issue) {
-      const { summary } = issue.fields;
-      // let summary = 'test';
-      // console.log('Status: ' + issue);
-      resolve({
-        title: summary,
-        link: `https://totalwine.atlassian.net/browse/${number}`
+      jira.findIssue(number)
+      .then(function(issue) {
+        const { summary } = issue.fields;
+        console.log('Summary: ' + summary);
+        resolve({
+          title: summary,
+          link: `https://totalwine.atlassian.net/browse/${number}`
+        });
+      })
+      .catch(function(err) {
+        console.error(err);
+        reject(err)
       });
-    })
-    .catch(function(err) {
-      console.error(err);
-      reject(err)
-    });
     });
   }
 
@@ -55,10 +54,9 @@ var jira = new JiraApi({
     while(commits.length > 0){
       promises.push(findJiraIssue(commits.pop()));
     }
-
-    return Promise.all(promises).then((values)=>{
-      console.log('nex',values);
-      });
+    Promise.all(promises).then((results)=>{
+      console.log('res',results);
+    });
   };
 
   const jiraTitles = [
@@ -129,6 +127,7 @@ class DataHandler {
 
                       console.log('jiras: ',jiras);
                       findJiraIssues(jiras)
+                      
               })
         });
     }

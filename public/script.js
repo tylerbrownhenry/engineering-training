@@ -33,7 +33,6 @@
   const utils = {
     renderData: async () => {
       return new Promise(async(resolve)=>{
-
           const result = await fetch('/getJiraTickets');
           result.json().then((data)=>{
             let response = '';
