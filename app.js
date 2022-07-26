@@ -11,8 +11,10 @@ router.get('/',function(req,res){
 });
 
 router.get('/getJiraTickets',function(req,res){
-  res.json({
-    jirasObject: dataHandler.jirasObject
+  dataHandler.fetchGitHubData().then((results)=>{
+    res.json({
+      jirasObject: results
+    })
   })
 });
 
