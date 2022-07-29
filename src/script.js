@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import utils from '../utils'
+import Button from './components/button';
 
 ReactDOM.render(
-  <React.Fragment><h1>Hello World!</h1></React.Fragment>,
+  <Button/>,
   document.getElementById('root')
 );
 
@@ -32,12 +34,12 @@ ReactDOM.render(
         });
       })
     }
-  
+
     let gridContainer = document.getElementsByClassName("grid-container");
-    // This is an array of all elements that have the class 'grid container' on the page
+// This is an array of all elements that have the class 'grid container' on the page
     gridContainer = gridContainer[0];
-    // This is now the first element from the array
-  
+// This is now the first element from the array
+
     const utils = {
       renderData: async () => {
         return new Promise(async(resolve)=>{
@@ -64,7 +66,7 @@ ReactDOM.render(
         })
       }
     }
-  
+    
     console.log("BEFORE initModalButton is called");
     await initModalButton();
     console.log("AFTER initModalButton is called");
