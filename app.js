@@ -18,6 +18,12 @@ router.get('/getJiraTickets',function(req,res){
   })
 });
 
+router.get('/getNumber/:number',function(req,res){
+    res.json({
+      number: req.params.number
+    })
+});
+
 app.use(express.static('public'))
 app.use('/', router);
 app.listen(port, () => {
