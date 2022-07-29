@@ -20,7 +20,6 @@ router.get('/getJiraTickets',function(req,res){
 
 app.use(express.static('public'))
 app.use('/', router);
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
