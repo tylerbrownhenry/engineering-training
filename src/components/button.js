@@ -14,8 +14,10 @@ export default class Button extends React.Component {
         return
       }
       modalContainer.classList.toggle("hidden");
-      utils.loadData(()=>{
-        store.dispatch({ type:"TOGGLE_DATALOADED" })
+
+      store.dispatch({ type:"LOAD_DATA" })
+      utils.loadData((jiras)=>{
+        store.dispatch({ type:"JIRAS_LOADED", jiras })
       });
     }
   

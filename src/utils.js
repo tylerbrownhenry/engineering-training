@@ -9,22 +9,13 @@ const utils = {
     return new Promise(async(resolve)=>{
         const result = await fetch('/getJiraTickets');
         result.json().then((data)=>{
-            let response = '';
-            data.jirasObject.forEach((jira) => {
-            const { title, link, icon } = jira;
-            response += `
-            <li></i><i class="${icon}"></i><a href="${link}">${title}</a></li>
-            `;
-            });
-            resolve(response);
+            resolve(data.jirasObject);
         })
     })
     },
     loadData: function (callback) {
     console.log("Data loaded",this);
     this.renderData().then((response)=>{
-        console.log('response', response)
-        gridContainer.innerHTML = response;
         modalContainer.classList.add("hidden");
         callback();
     })
