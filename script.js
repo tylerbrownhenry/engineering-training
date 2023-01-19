@@ -16,3 +16,22 @@ closeModalButton[0].addEventListener("click", function(){
     const modalContainer = document.getElementById("modalContainer");
     modalContainer.classList.toggle("hidden");
 });
+
+const jiraLinks = [
+    "https://totalwine.atlassian.net/browse/TT-2",
+    "https://totalwine.atlassian.net/browse/TT-16",
+    "https://totalwine.atlassian.net/browse/TT-17",
+    "https://totalwine.atlassian.net/browse/TT-18",
+    "https://totalwine.atlassian.net/browse/TT-19"
+];
+
+const jiraTitles = [
+    "Create a public repository under your GitHub account",
+    "Create a new script file, and import it into index.html and add a console log",
+    "JavaScript: Variables",
+    "JavaScript: Event Listeners - Add Toggle Button Inside of Modal",
+    "JavaScript: Functions - Write a function to toggle hidden class on modal"
+];
+
+console.log("jiraTitles", jiraTitles);
+console.log("jiraLinks", jiraLinks);
