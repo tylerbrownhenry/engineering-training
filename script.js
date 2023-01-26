@@ -35,3 +35,20 @@ const jiraTitles = [
 
 console.log("jiraTitles", jiraTitles);
 console.log("jiraLinks", jiraLinks);
+
+const jirasArray = [];
+
+
+jiraTitles.forEach((e, i)=>{
+    const title = jiraTitles[i];
+    const link = jiraLinks[i];
+    jirasArray.push({
+        title: jiraTitles[i],
+        link: jiraLinks[i]w
+    })
+    console.log(e)
+});
+
+jiraLinks.forEach((e)=>console.log(e));
+
+console.log("jirasArray", jirasArray);
